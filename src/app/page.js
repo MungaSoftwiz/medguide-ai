@@ -1,7 +1,7 @@
 "use client"; // Ensure this is a Client Component
 
 import { useState } from 'react';
-import "./styles/globals.css"
+import "./styles/globals.css";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,15 +14,34 @@ export default function Home() {
     setIsLoggedIn(true); // Implement actual login logic here
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (input.trim() === "") return;
+
+    // Add user message to chat
     setMessages([...messages, { text: input, type: 'user' }]);
     setInput("");
 
-    // Simulate a response from AI
-    setTimeout(() => {
-      setMessages([...messages, { text: input, type: 'user' }, { text: "This is a simulated response.", type: 'ai' }]);
-    }, 1000);
+    try {
+      // Make API request to your backend
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: input }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      // Add AI response to chat
+      setMessages([...messages, { text: input, type: 'user' }, { text: data, type: 'ai' }]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setMessages([...messages, { text: input, type: 'user' }, { text: 'Error: Could not fetch response', type: 'ai' }]);
+    }
   };
 
   if (!isLoggedIn) {
@@ -58,8 +77,6 @@ export default function Home() {
           {isChatboxOpen ? 'Close Chatbox' : 'Open Chatbox'}
         </button>
       </section>
-
-      
 
       {isChatboxOpen && (
         <section className="section chatbox">
