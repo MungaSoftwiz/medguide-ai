@@ -11,7 +11,7 @@ export async function POST(req) {
   try {
     const pinecone = new PineconeClient
     ({
-      apiKey:'587df068-f9f4-4dd1-844b-9442b86f54aa'
+      apiKey:'PINECONE_API_KEY'
     });
     const index = pinecone.Index('docs-medical');
 
@@ -40,7 +40,7 @@ export async function POST(req) {
     console.log('\n\n\n\n\n Similarity Search done');
 
     const openai = new OpenAI({
-      apiKey:'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',
+      apiKey:'OPENROUTER_API_KEY',
       baseURL: 'https://openrouter.ai/api/v1',
     });
     console.log("Open ai model defined ")
