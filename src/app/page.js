@@ -1,4 +1,4 @@
-"use client"; // Ensure this is a Client Component
+"use client";
 
 import { useState } from 'react';
 import "./styles/globals.css";
@@ -11,7 +11,7 @@ export default function Home() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    setIsLoggedIn(true); // Implement actual login logic here
+    setIsLoggedIn(true); //TBD
   };
 
   const handleSend = async () => {
@@ -22,7 +22,6 @@ export default function Home() {
     setInput("");
 
     try {
-      // Make API request to your backend
       const response = await fetch('/api', {
         method: 'POST',
         headers: {
@@ -36,30 +35,13 @@ export default function Home() {
       }
 
       const data = await response.json();
-      // Add AI response to chat
+
       setMessages([...messages, { text: input, type: 'user' }, { text: data, type: 'ai' }]);
     } catch (error) {
       console.error('Error sending message:', error);
       setMessages([...messages, { text: input, type: 'user' }, { text: 'Error: Could not fetch response', type: 'ai' }]);
     }
   };
-
-  if (!isLoggedIn) {
-    return (
-      <div className="login-section">
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" placeholder="Enter your username" required />
-
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required />
-
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    );
-  }
 
   return (
     <div>
