@@ -1,78 +1,83 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { OpenAI } from 'openai';
-import { PineconeClient } from '@pinecone-database/pinecone';
+import { NextResponse } from 'next/server';
+import PipelineSingleton from './pipeline';
+import { Pinecone as PineconeClient } from '@pinecone-database/pinecone';
+import { PineconeStore } from '@langchain/pinecone';
+import OpenAI from 'openai';
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
-const PINECONE_ENVIRONMENT = process.env.PINECONE_ENVIRONMENT;
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
-const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY,
-});
-
-const pinecone = new PineconeClient({
-  apiKey: PINECONE_API_KEY,
-  environment: PINECONE_ENVIRONMENT,
-});
-
-// Retrieve docs and embeddings from Pinecone
-async function retrieveDocuments(query) {
-  const index = pinecone.Index('medguide-ai');
-  const { data: { embedding } } = await openai.embeddings.create({
-    input: query,
-    model: 'text-embedding-ada-002',
-  });
-
-  const results = await index.query({
-    vector: embedding,
-    topK: 2,
-  });
-
-  return results.matches.map(match => match.metadata);
-}
-
-// Handle incoming requests
 export async function POST(req) {
   try {
+    const pinecone = new PineconeClient
+    ({
+      apiKey:'587df068-f9f4-4dd1-844b-9442b86f54aa'
+    });
+    const index = pinecone.Index('docs-medical');
+
     const body = await req.json();
-    const messages = body.messages || [];
-    const userInput = messages[messages.length - 1]?.content || '';
 
-    const relevantDocs = await retrieveDocuments(userInput);
-    const context = relevantDocs.map(doc => doc.content).join('\n');
+    const query = body.query || '';
+    console.log(query);
+    const extractor = await PipelineSingleton.getInstance();
 
-    const prompt = `You are an AI chatbot assistant for hospitals. 
-Use 'knowledge' instead of context in your responses. 
-Never make up answers, if unsure, say: 'I am not sure, let me connect you with a health practitioner'.
-Only answer questions related to the context, if the question is out of scope, say: 'I am not sure, 
-let me connect you with a healthcare practitioner'.
-Answer based on the context provided:\n\nContext:\n${context}\n\nUser: ${userInput}\nAI:`;
+    console.log('\n\n\n\n extractor made succesfull');
+    const query_embedded = await extractor(query,{ pooling: 'mean', normalize: true });
 
-    // Get response from OpenAI
-    const responseStream = openai.completions.create({
-      model: 'text-davinci-003',
-      prompt,
-      max_tokens: 150,
-      temperature: 0.7,
-      stream: true,
+    const vectorStore = await PineconeStore.fromExistingIndex(extractor, {
+      pineconeIndex: index,
+    });
+    console.log('\n\n\n\n\n Vector Store defined successfully\n\nn\n\n\n');
+
+    const query_embedded_array = query_embedded.tolist()[0];
+     console.log(query_embedded_array)
+    console.log('size is ',query_embedded_array.length)
+    const results = await vectorStore.similaritySearchVectorWithScore(
+      query_embedded_array,
+      5
+    );
+
+    console.log('\n\n\n\n\n Similarity Search done');
+
+    const openai = new OpenAI({
+      apiKey:'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',
+      baseURL: 'https://openrouter.ai/api/v1',
+    });
+    console.log("Open ai model defined ")
+    console.log(results)
+    const context = results
+    .map(([doc]) => doc.pageContent || 'No content available')
+    .join('\n\n');
+
+    console.log("contenxt created\n\n\n",context)
+    const prompt = `  "You are an assistant for answering medical questions regarding diseases ,symptoms and their treatment and causes."
+    "Use the following pieces of retrieved context to answer "
+    "the question. If you don't know the answer, say that you "
+    "don't know. Use three sentences maximum and keep the "
+    "answer concise. and make the answer in such a way that it feels "
+    "like talking to a doctor and provide answers from the knowledge of context. "
+    "Use 'knowledge' instead of 'context'. "
+    "Also as much as you want to be as though a doctor do not bombard "
+    "the user with overly complex scientific terms."
+    "If the user says 'No more questions' or 'thank you' withut a question "
+    "then they have completed asking, thank them and conclude. "
+    "\n\n"\n\n${context}\n\nQuestion: ${query}`;
+    console.log("\n\n\n\nprompt generated")
+    console.log(prompt)
+    const response = await openai.chat.completions.create({
+      model: 'meta-llama/llama-3.1-8b-instruct:free',
+      messages: [{ role: 'user', content: prompt }],
     });
 
-    let aiResponse = '';
+   const end = response.choices[0].message.content;
+    console.log(query_embedded.tolist());
+    console.log("size of query :",query_embedded.tolist()[0].length)
+    console.log(end);
 
-    // Stream response from OpenAI
-    const readableStream = new ReadableStream({
-      async start(controller) {
-        for await (const chunk of responseStream) {
-          aiResponse += chunk.choices[0].text;
-          controller.enqueue(new TextEncoder().encode(chunk.choices[0].text));
-        }
-        controller.close();
-      },
-    });
-
-    return new NextResponse(readableStream);
+    return NextResponse.json(end);
   } catch (error) {
-    console.error('Error handling request:', error);
-    return new NextResponse(JSON.stringify({ error: error.message }), { status: 500 });
+    console.log(error);
+    return NextResponse.json({ error: error.message,
+     }, { status: 500 });
   }
 }
