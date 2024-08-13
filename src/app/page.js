@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from 'react';
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Send } from "lucide-react";
 import "./styles/globals.css";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isChatboxOpen, setIsChatboxOpen] = useState(false);
+  //const [isChatboxOpen, setIsChatboxOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
@@ -44,35 +47,37 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <nav>
-        <a href="#welcome">Welcome</a>
-        <a href="#about">About Us</a>
-        <a href="#health-tips">Health Tips</a>
-        <a href="#appointment">Book Appointment</a>
+    <div className="h-screen flex flex-col">
+      {/* Navigation */}
+      <nav className="bg-white shadow-md p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <a href="#" className="text-2xl font-semibold">Medguide</a>
+          <div className="hidden max-w-max px-4 py-2 mx-auto rounded shadow-md lg:flex space-x-8">
+            <a href="#welcome" className="hover:text-sky-200">Welcome</a>
+            <a href="#about" className="hover:text-sky-200">About Us</a>
+            <a href="#health-tips" className="hover:text-sky-200">Health Tips</a>
+            <a href="#appointment" className="hover:text-sky-200">Book Appointment</a>
+          </div>
+        </div>
       </nav>
 
-      <section id="welcome" className="section section-small">
-        <h2>Chat with MedguideAI</h2>
-        <p>Hi there! We’re here to help you with your health concerns. Feel free to ask questions or book an appointment.</p>
-        <button onClick={() => setIsChatboxOpen(!isChatboxOpen)}>
-          {isChatboxOpen ? 'Close Chatbox' : 'Open Chatbox'}
-        </button>
-      </section>
-
-      {isChatboxOpen && (
-        <section className="section chatbox">
-          <div className="chatbox-header">Chat with our AI Assistant</div>
-          <div className="chatbox-messages">
-            {messages.map((msg, index) => (
-              <div key={index} className={`message ${msg.type}`}>
-                {msg.text}
+      {/* Main Content */}
+      <main className="flex-1 overflow-hidden bg-muted">
+        <div className="container h-full flex flex-col py-8">
+          <div className="flex-1 overflow-y-auto">
+            {messages.map((message, index) => (
+              <div key={index} className="flex items-start mb-4">
+                <div className="w-8 h-8 bg-primary rounded-full mr-4"></div>
+                <div className="bg-white p-4 rounded-lg">
+                  <p className="text-lg">{message.text}</p>
+                </div>
               </div>
             ))}
           </div>
-          <div className="chatbox-input">
-            <input
-              type="text"
+          <form className="mt-auto relative">
+            <Textarea
+              className="w-full text-lg"
+              placeholder="How may I be of help today?"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
@@ -80,43 +85,19 @@ export default function Home() {
                   handleSend();
                 }
               }}
-              placeholder="Type your message here..."
             />
-            <button onClick={handleSend}>Send</button>
-          </div>
-        </section>
-      )}
-      <section id="about" className="section section-small">
-        <h2>About Us</h2>
-        <p>We provide AI-powered healthcare support to help you make informed decisions and manage your health effectively.</p>
-      </section>
-
-      <section id="health-tips" className="section section-small">
-        <h2>Health Tips</h2>
-        <ul>
-          <li> Stay hydrated by drinking at least 8 glasses of water daily.</li>
-          <li> Engage in regular physical activity to maintain a healthy body.</li>
-          <li> Eat a balanced diet with plenty of fruits and vegetables.</li>
-          {/* Add more tips with icons */}
-        </ul>
-      </section>
-
-      <section id="appointment" className="section section-medium">
-        <h2>Book an Appointment</h2>
-        <form>
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" required />
-
-          <label htmlFor="date">Preferred Date:</label>
-          <input type="date" id="date" name="date" required />
-
-          <label htmlFor="time">Preferred Time:</label>
-          <input type="time" id="time" name="time" required />
-
-          <button type="submit">Book Appointment</button>
-        </form>
-      </section>
+            <Button
+              type="submit"
+              size="icon"
+              onClick={handleSend}
+              className="absolute top-1/3 right-4 rounded-full"
+              disabled={!input}
+            >
+              <Send size={24} />
+            </Button>
+          </form>
+        </div>
+      </main>
     </div>
   );
 }
-
