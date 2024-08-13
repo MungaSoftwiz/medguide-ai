@@ -1,25 +1,18 @@
-//import './styles/globals.css';
+import { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./styles/globals.css";
 
-export default function Layout({ children }) {
+export const metadata = {
+  title: "Healthcare Assistant",
+  description: "A healthcare assistant chatbot app",
+};
+
+export default function RootLayout({
+  children,
+}) {
   return (
-    <html>
-      <head>
-        <title>Healthcare Chatbot</title>
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body>
-        <header>
-          <h1>Healthcare Chatbot</h1>
-        </header>
-        <main>
-          <div className="container">
-            {children}
-          </div>
-        </main>
-        <footer>
-          <p>&copy; 2024 Healthcare Chatbot. All rights reserved.</p>
-        </footer>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }
