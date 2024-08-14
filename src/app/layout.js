@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Healthcare Assistant",
-  description: "A healthcare assistant chatbot app",
+  description: "A healthcare assistant chatbot app buitl using Next.js, tailwindcss, and pinecone as the serverless databse. The book is updated using RAG with the CMDT.",
 };
 
 export default function RootLayout({
@@ -15,9 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>{ children }</body>
       <Analytics />
-      <body>{children}</body>
     </html>
   );
 }
