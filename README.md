@@ -30,7 +30,7 @@ Ensure you have the necessary dependencies installed:
 
 ```bash
 Copy code
-npm isntall
+npm install
 ```
 ## Run the Application:
 
