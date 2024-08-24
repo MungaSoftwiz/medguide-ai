@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MedguideAI
 
-## Getting Started
+MedguideAI is an AI-powered chatbot designed to answer medical questions and provide timely assistance. It leverages advanced algorithms to deliver accurate medical information, enhancing accessibility and user experience.
 
-First, run the development server:
+## Features
+
+- **AI-Powered Responses:** Utilizes natural language processing to understand and respond to user queries.
+- **Medical Knowledge Base:** Provides information on a wide range of medical topics.
+- **User-Friendly Interface:** Simple and intuitive chat interface for ease of use.
+- **Active User Base:** Serves over 30 active users with reliable and prompt responses.
+
+## Installation
+
+To set up MedguideAI locally, follow these steps:
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/MungaSoftwiz/medguide-ai.git
+   ```
+2. **Navigate to the Project Directory:**
+
+```bash
+cd medguide-ai
+```
+
+3. **Install Dependencies:**
+
+Ensure you have the necessary dependencies installed:
+
+```bash
+Copy code
+npm isntall
+```
+## Run the Application:
+
+Start the application using:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+The chatbot will be available at http://localhost:3000.
+
+## Usage
+
+Interact with the chatbot through the web interface. Enter your medical queries, and MedguideAI will provide relevant information and assistance based on its knowledge base.
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. **Fork the Repository**
+
+2. **Create a New Branch:**
+
+```bash
+git checkout -b feature-branch
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Commit Your Changes:**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+git commit -am 'Add new feature'
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. **Push to the Branch:**
 
-## Learn More
+```bash
+Copy code
+git push origin feature-branch
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. **Create a Pull Request**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Acknowledgments
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Inspired by the need to improve access to medical information.
+Thanks to the open-source community for their invaluable resources and support.
