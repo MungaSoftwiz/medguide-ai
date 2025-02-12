@@ -2,11 +2,13 @@
   "name": "medguide-ai",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "type": "module",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "init-pinecone": "node ./src/app/scripts/init-pinecone.js"
   },
   "dependencies": {
     "@langchain/pinecone": "^0.0.8",
@@ -25,7 +27,8 @@
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.9",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "dotenv": "^10.0.0"
   },
   "devDependencies": {
     "eslint": "^8",
