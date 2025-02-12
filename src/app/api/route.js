@@ -1,83 +1,123 @@
-import { NextResponse } from 'next/server';
-import PipelineSingleton from './pipeline';
 import { Pinecone as PineconeClient } from '@pinecone-database/pinecone';
-import { PineconeStore } from '@langchain/pinecone';
 import OpenAI from 'openai';
+import 'dotenv/config';
+import PipelineSingleton from './pipeline';
 
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 export async function POST(req) {
   try {
-    const pinecone = new PineconeClient
-    ({
-      apiKey:'587df068-f9f4-4dd1-844b-9442b86f54aa'
+    const pinecone = new PineconeClient({
+      apiKey: PINECONE_API_KEY,
     });
-    const index = pinecone.Index('docs-medical');
+
+    const index = pinecone.Index('medguide-ai');
 
     const body = await req.json();
-
     const query = body.query || '';
-    console.log(query);
-    const extractor = await PipelineSingleton.getInstance();
+    console.log('Query:', query);
 
-    console.log('\n\n\n\n extractor made succesfull');
-    const query_embedded = await extractor(query,{ pooling: 'mean', normalize: true });
+    const pipeline = await PipelineSingleton.getInstance();
 
-    const vectorStore = await PineconeStore.fromExistingIndex(extractor, {
-      pineconeIndex: index,
+    // Convert the query into an embedding
+    const query_embedded = await pipeline(query, {
+      pooling: 'mean',
+      normalize: true,
     });
-    console.log('\n\n\n\n\n Vector Store defined successfully\n\nn\n\n\n');
-
     const query_embedded_array = query_embedded.tolist()[0];
-     console.log(query_embedded_array)
-    console.log('size is ',query_embedded_array.length)
-    const results = await vectorStore.similaritySearchVectorWithScore(
-      query_embedded_array,
-      5
-    );
+    console.log('Query embedded array:', query_embedded_array);
+    console.log('Size is', query_embedded_array.length);
 
-    console.log('\n\n\n\n\n Similarity Search done');
+    // Query Pinecone for relevant matches
+    const response = await index.query({
+      topK: 5,
+      vector: query_embedded_array,
+      includeValues: true,
+      includeMetadata: true,
+    });
+
+    console.log('Pinecone response:', response);
+
+    // Create a context string from the retrieved matches
+    let contextString;
+    if (response.matches.length > 0) {
+      contextString = response.matches
+        .map((match) => match.metadata.text || 'No content available')
+        .join('\n\n');
+    } else {
+      contextString = 'No relevant knowledge found.';
+    }
+    console.log('Context created:', contextString);
+
+    // Generate the prompt for the Deepseek model with multi-step prompting
+    const prompt = `You are an assistant for answering questions about MedGuide Hospital, a premier healthcare facility in Nairobi, Kenya. Your goal is to provide accurate, concise, and helpful information about the hospital's services, specialties, staff, amenities, and other relevant details.
+
+When answering questions:
+1. Use the provided knowledge (context) to answer the question. If the knowledge does not contain the answer, say "I don't know."
+2. Keep your answers concise and to the point (maximum 2-3 sentences).
+3. Provide only the necessary information. Do not explain your reasoning or thought process.
+4. Use simple and clear language. Avoid overly complex medical terms unless necessary.
+5. If the user says "thank you" or "no more questions," respond politely and conclude the conversation.
+6. If the user asks a question unrelated to MedGuide Hospital, politely inform them that you can only answer questions about the hospital.
+
+Always prioritize accuracy and professionalism in your responses.
+
+Context:
+${contextString}
+
+Question: ${query}`;
+
+    console.log('Prompt generated:', prompt);
 
     const openai = new OpenAI({
-      apiKey:'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',
+      apiKey: OPENROUTER_API_KEY,
       baseURL: 'https://openrouter.ai/api/v1',
     });
-    console.log("Open ai model defined ")
-    console.log(results)
-    const context = results
-    .map(([doc]) => doc.pageContent || 'No content available')
-    .join('\n\n');
+    console.log('OpenAI model defined');
 
-    console.log("contenxt created\n\n\n",context)
-    const prompt = `  "You are an assistant for answering medical questions regarding diseases ,symptoms and their treatment and causes."
-    "Use the following pieces of retrieved context to answer "
-    "the question. If you don't know the answer, say that you "
-    "don't know. Use three sentences maximum and keep the "
-    "answer concise. and make the answer in such a way that it feels "
-    "like talking to a doctor and provide answers from the knowledge of context. "
-    "Use 'knowledge' instead of 'context'. "
-    "Also as much as you want to be as though a doctor do not bombard "
-    "the user with overly complex scientific terms."
-    "If the user says 'No more questions' or 'thank you' withut a question "
-    "then they have completed asking, thank them and conclude. "
-    "\n\n"\n\n${context}\n\nQuestion: ${query}`;
-    console.log("\n\n\n\nprompt generated")
-    console.log(prompt)
-    const response = await openai.chat.completions.create({
-      model: 'meta-llama/llama-3.1-8b-instruct:free',
-      messages: [{ role: 'user', content: prompt }],
-    });
+    try {
+      const completion = await openai.chat.completions.create({
+        model: 'deepseek/deepseek-r1:free', // Use the free model
+        messages: [{ role: 'system', content: prompt }],
+        stream: true,
+      });
 
-   const end = response.choices[0].message.content;
-    console.log(query_embedded.tolist());
-    console.log("size of query :",query_embedded.tolist()[0].length)
-    console.log(end);
+      // Create a ReadableStream for streaming the response
+      const responseStream = new ReadableStream({
+        async start(controller) {
+          try {
+            for await (const chunk of completion) {
+              const content = chunk.choices[0]?.delta?.content || '';
+              controller.enqueue(new TextEncoder().encode(content));
+            }
+            controller.close();
+          } catch (error) {
+            console.error('Error in streaming response:', error);
+            controller.error(error);
+          }
+        },
+      });
 
-    return NextResponse.json(end);
+      return new Response(responseStream, {
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    } catch (streamError) {
+      console.error('Streaming failed, falling back to non-streaming:', streamError);
+
+      const completion = await openai.chat.completions.create({
+        model: 'deepseek-r1:free', // Use the free model
+        messages: [{ role: 'system', content: prompt }],
+        stream: false,
+      });
+
+      const content = completion.choices[0]?.message?.content || 'No response from the model.';
+      return new Response(content, {
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    }
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: error.message,
-     }, { status: 500 });
+    console.error('Error in POST function:', error);
+    return new Response('Internal Server Error', { status: 500 });
   }
 }
