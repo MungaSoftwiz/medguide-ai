@@ -23,11 +23,11 @@ export default function Home() {
 
   const handleSend = async () => {
     if (input.trim() === "") return;
-
+  
     // Add user message to chat
-    setMessages([...messages, { text: input, type: 'user' }]);
+    setMessages((prevMessages) => [...prevMessages, { text: input, type: 'user' }]);
     setInput("");
-
+  
     try {
       const response = await fetch('/api', {
         method: 'POST',
@@ -36,17 +36,44 @@ export default function Home() {
         },
         body: JSON.stringify({ query: input }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
-      const data = await response.json();
-
-      setMessages([...messages, { text: input, type: 'user' }, { text: data, type: 'ai' }]);
+  
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let aiResponse = '';
+  
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+  
+        const chunk = decoder.decode(value, { stream: true });
+        aiResponse += chunk;
+  
+        // Update the AI message in real-time
+        setMessages((prevMessages) => {
+          const lastMessage = prevMessages[prevMessages.length - 1];
+          if (lastMessage?.type === 'ai') {
+            return [
+              ...prevMessages.slice(0, -1),
+              { text: aiResponse, type: 'ai' },
+            ];
+          } else {
+            return [
+              ...prevMessages,
+              { text: aiResponse, type: 'ai' },
+            ];
+          }
+        });
+      }
     } catch (error) {
       console.error('Error sending message:', error);
-      setMessages([...messages, { text: input, type: 'user' }, { text: 'Error: Could not fetch response', type: 'ai' }]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: 'Error: Could not fetch response', type: 'ai' },
+      ]);
     }
   };
 
@@ -55,7 +82,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="bg-white shadow-md p-4 fixed top-0 left-0 w-full z-10">
         <div className="container mx-auto flex justify-between items-center">
-          <a href="#" className="text-2xl font-semibold">Medguide</a>
+          <a href="#" className="text-2xl font-semibold">MedGuide Hospital Chat Assistant</a>
           <div className="hidden max-w-max px-4 py-2 mx-auto rounded shadow-md lg:flex space-x-8">
             <a href="#welcome" className="hover:text-sky-200">Welcome</a>
             <a href="#about" className="hover:text-sky-200">About Us</a>
@@ -91,7 +118,7 @@ export default function Home() {
       <form className="fixed bottom-0 left-0 w-full bg-white border-t shadow-lg p-4">
         <Textarea
           className="w-full text-lg rounded-md"
-          placeholder="How may I be of help today?"
+          placeholder="MedGuide Hospital Chat Assistant at your service. How may I be of help today?"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
