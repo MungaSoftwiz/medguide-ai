@@ -50,18 +50,28 @@ export async function POST(req) {
     }
     console.log('Context created:', contextString);
 
-    // Generate the prompt for the Deepseek model with multi-step prompting
-    const prompt = `You are an assistant for answering questions about MedGuide Hospital, a premier healthcare facility in Nairobi, Kenya. Your goal is to provide accurate, concise, and helpful information about the hospital's services, specialties, staff, amenities, and other relevant details.
+    // Generate the system prompt for the model with multi-step prompting
+    const prompt = `You are an assistant for answering questions about MedGuide Hospital, a premier healthcare facility in Nairobi, Kenya. Your goal is to provide accurate, concise, and helpful information about the hospital's services, specialties, staff, amenities, and other relevant details:
 
 When answering questions:
 1. Use the provided knowledge (context) to answer the question. If the knowledge does not contain the answer, say "I don't know."
 2. Keep your answers concise and to the point (maximum 2-3 sentences).
-3. Provide only the necessary information. Do not explain your reasoning or thought process.
+3. If the answer involves a list, format each item on its own line for clarity.
 4. Use simple and clear language. Avoid overly complex medical terms unless necessary.
 5. If the user says "thank you" or "no more questions," respond politely and conclude the conversation.
 6. If the user asks a question unrelated to MedGuide Hospital, politely inform them that you can only answer questions about the hospital.
 
 Always prioritize accuracy and professionalism in your responses.
+
+Here is an example of how to answer a question:
+
+Q: "What amenities does MedGuide Hospital offer?"
+A: "MedGuide Hospital offers the following amenities:
+- Comfortable private and semi-private rooms
+- Free Wi-Fi
+- Cafeteria with healthy meals
+- Secure parking
+- Prayer room"
 
 Context:
 ${contextString}
@@ -78,7 +88,7 @@ Question: ${query}`;
 
     try {
       const completion = await openai.chat.completions.create({
-        model: 'deepseek/deepseek-r1:free', // Use the free model
+        model: 'google/gemini-2.0-flash-exp:free',
         messages: [{ role: 'system', content: prompt }],
         stream: true,
       });
