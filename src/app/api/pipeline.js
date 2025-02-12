@@ -1,5 +1,7 @@
 import { pipeline } from "@xenova/transformers";
 
+process.env.CACHE_DIR = '/tmp';
+
 class PipelineSingleton {
   static task = 'feature-extraction';
   static model = 'Xenova/all-MiniLM-L6-v2';
