@@ -162,5 +162,322 @@
   {
     "id": "41",
     "text": "For more information, please visit us at 123 Wellness Avenue, Nairobi, Kenya. You can also contact us by phone at +254 700 123 456, by email at info@medguidehospital.co.ke, or through our website at www.medguidehospital.co.ke."
+  },
+  {
+    "id": "42",
+    "text": "Dr. Elizabeth Njoroge is a leading dermatologist at MedGuide Hospital, specializing in skin cancer and cosmetic dermatology. She has over 15 years of experience and is known for her expertise in Mohs surgery and laser treatments."
+  },
+  {
+    "id": "43",
+    "text": "Dr. James Kariuki is a neurologist with a focus on stroke management and epilepsy. He has published several research papers on neurological disorders and is a member of the World Federation of Neurology."
+  },
+  {
+    "id": "44",
+    "text": "Dr. Fatuma Abdi is a pediatric oncologist dedicated to treating childhood cancers. She works closely with families to provide compassionate care and is involved in clinical trials for new cancer therapies."
+  },
+  {
+    "id": "45",
+    "text": "Dr. Samuel Odhiambo is a cardiothoracic surgeon specializing in heart transplants and valve replacements. He has performed over 500 successful surgeries and is a pioneer in minimally invasive cardiac procedures."
+  },
+  {
+    "id": "46",
+    "text": "Dr. Grace Wambui is an obstetrician and gynecologist with expertise in high-risk pregnancies. She is also trained in advanced laparoscopic surgeries for gynecological conditions."
+  },
+  {
+    "id": "47",
+    "text": "Dr. Michael Kimani is a radiologist with a focus on interventional radiology. He uses imaging techniques to guide minimally invasive procedures, such as tumor ablations and angioplasties."
+  },
+  {
+    "id": "48",
+    "text": "Dr. Amina Mohammed is a psychiatrist specializing in mental health disorders, including depression, anxiety, and PTSD. She offers both therapy and medication management for her patients."
+  },
+  {
+    "id": "49",
+    "text": "Dr. Brian Ochieng is an anesthesiologist with expertise in pain management and critical care. He ensures patient safety and comfort during surgical procedures."
+  },
+  {
+    "id": "50",
+    "text": "Dr. Caroline Muthoni is a nephrologist specializing in kidney diseases and dialysis. She is also involved in kidney transplant programs at MedGuide Hospital."
+  },
+  {
+    "id": "51",
+    "text": "Dr. David Maina is a pulmonologist with a focus on respiratory diseases, including asthma, COPD, and lung cancer. He offers advanced diagnostic and treatment options for his patients."
+  },
+  {
+    "id": "52",
+    "text": "Dr. Esther Njeri is a gastroenterologist specializing in digestive disorders, including irritable bowel syndrome (IBS), Crohn’s disease, and liver conditions. She performs endoscopic procedures to diagnose and treat these conditions."
+  },
+  {
+    "id": "53",
+    "text": "Dr. Paul Ouma is an endocrinologist with expertise in diabetes and hormonal disorders. He works closely with patients to manage their conditions through lifestyle changes and medication."
+  },
+  {
+    "id": "54",
+    "text": "Dr. Sarah Wairimu is a hematologist specializing in blood disorders, including anemia, leukemia, and clotting disorders. She offers personalized treatment plans for her patients."
+  },
+  {
+    "id": "55",
+    "text": "Dr. Victor Mutua is a urologist with expertise in prostate health, kidney stones, and urinary tract infections. He performs minimally invasive surgeries for urological conditions."
+  },
+  {
+    "id": "56",
+    "text": "Dr. Linda Chebet is a rheumatologist specializing in autoimmune diseases, including rheumatoid arthritis and lupus. She offers both medical and therapeutic treatments for her patients."
+  },
+  {
+    "id": "57",
+    "text": "Dr. Kevin Omondi is a plastic and reconstructive surgeon specializing in burn injuries and cosmetic surgeries. He is known for his work in restoring function and appearance for his patients."
+  },
+  {
+    "id": "58",
+    "text": "Dr. Mercy Atieno is a geriatrician specializing in the care of elderly patients. She focuses on managing chronic conditions and improving the quality of life for seniors."
+  },
+  {
+    "id": "59",
+    "text": "Dr. Eric Mwangi is a pathologist with expertise in diagnosing diseases through laboratory tests. He works closely with other doctors to provide accurate diagnoses for patients."
+  },
+  {
+    "id": "60",
+    "text": "Dr. Nancy Wanjiku is a physiotherapist specializing in rehabilitation for patients recovering from surgery or injuries. She uses a combination of exercises and therapies to help patients regain mobility."
+  },
+  {
+    "id": "61",
+    "text": "Dr. Patrick Kipchumba is a nutritionist who works with patients to develop personalized diet plans. He specializes in managing conditions like diabetes, obesity, and cardiovascular diseases through nutrition."
+  },
+  {
+    "id": "62",
+    "text": "Dr. Irene Muthoni is a clinical psychologist offering therapy for mental health conditions, including depression, anxiety, and trauma. She uses evidence-based approaches to help patients achieve emotional well-being."
+  },
+  {
+    "id": "63",
+    "text": "Dr. Collins Ochieng is an infectious disease specialist with expertise in managing HIV/AIDS, tuberculosis, and tropical diseases. He is involved in research and community health programs."
+  },
+  {
+    "id": "64",
+    "text": "Dr. Maryanne Kariuki is a fertility specialist offering treatments for infertility, including IVF and hormonal therapies. She works closely with couples to help them achieve their dream of parenthood."
+  },
+  {
+    "id": "65",
+    "text": "Dr. Brian Nyongesa is a pain management specialist offering treatments for chronic pain conditions, including back pain and migraines. He uses a combination of medications and therapies to provide relief."
+  },
+  {
+    "id": "66",
+    "text": "Dr. Susan Njeri is a sleep medicine specialist helping patients with sleep disorders, including insomnia and sleep apnea. She offers diagnostic tests and personalized treatment plans."
+  },
+  {
+    "id": "67",
+    "text": "Dr. Peter Mwangi is a sports medicine specialist offering care for athletes and active individuals. He specializes in injury prevention, treatment, and performance optimization."
+  },
+  {
+    "id": "68",
+    "text": "Dr. Grace Wanjiru is a palliative care specialist providing comfort and support for patients with serious illnesses. She focuses on improving the quality of life for patients and their families."
+  },
+  {
+    "id": "69",
+    "text": "Dr. John Kamau is a vascular surgeon specializing in the treatment of blood vessel disorders, including varicose veins and aneurysms. He performs minimally invasive procedures to restore blood flow."
+  },
+  {
+    "id": "70",
+    "text": "Dr. Lucy Muthoni is a pediatric cardiologist specializing in heart conditions in children. She offers both medical and surgical treatments for congenital heart defects."
+  },
+  {
+    "id": "71",
+    "text": "Dr. Boniface Munga is a maxillofacial surgeon specializing in surgeries of the face, jaw, and mouth. He works closely with dentists and orthodontists to provide comprehensive care."
+  },
+  {
+    "id": "72",
+    "text": "Dr. Anne Wambui is a reproductive endocrinologist offering treatments for hormonal imbalances and fertility issues. She is also involved in research on reproductive health."
+  },
+  {
+    "id": "73",
+    "text": "Dr. Joseph Kariuki is a thoracic surgeon specializing in lung and chest surgeries. He has extensive experience in treating lung cancer and other thoracic conditions."
+  },
+  {
+    "id": "74",
+    "text": "MedGuide Hospital offers a wide range of medications, including antibiotics like Amoxicillin and Ciprofloxacin, which are used to treat bacterial infections. Our pharmacy ensures that all medications are stored and dispensed under strict quality control measures."
+  },
+  {
+    "id": "75",
+    "text": "For pain management, we provide medications such as Paracetamol, Ibuprofen, and Morphine. These are carefully prescribed based on the patient’s condition and medical history to ensure safety and effectiveness."
+  },
+  {
+    "id": "76",
+    "text": "Our hospital stocks antidiabetic medications like Metformin and Insulin for managing diabetes. These are essential for regulating blood sugar levels and preventing complications."
+  },
+  {
+    "id": "77",
+    "text": "For cardiovascular conditions, we offer medications such as Atenolol, Amlodipine, and Warfarin. These help manage high blood pressure, heart disease, and blood clotting disorders."
+  },
+  {
+    "id": "78",
+    "text": "MedGuide Hospital provides antiretroviral therapy (ART) for HIV patients, including drugs like Tenofovir and Efavirenz. These medications are critical for managing HIV and improving patients’ quality of life."
+  },
+  {
+    "id": "79",
+    "text": "Our oncology department uses chemotherapy drugs such as Paclitaxel and Cisplatin for cancer treatment. These medications are administered under strict supervision to minimize side effects."
+  },
+  {
+    "id": "80",
+    "text": "For respiratory conditions, we offer inhalers like Salbutamol and corticosteroids such as Prednisone. These help manage asthma, COPD, and other lung diseases."
+  },
+  {
+    "id": "81",
+    "text": "MedGuide Hospital provides immunosuppressants like Cyclosporine for patients undergoing organ transplants. These medications prevent organ rejection and are closely monitored."
+  },
+  {
+    "id": "82",
+    "text": "Our psychiatry department offers antidepressants like Fluoxetine and antipsychotics such as Risperidone. These medications are used to treat mental health conditions like depression and schizophrenia."
+  },
+  {
+    "id": "83",
+    "text": "For gastrointestinal disorders, we provide medications like Omeprazole for acid reflux and Loperamide for diarrhea. These help manage digestive issues effectively."
+  },
+  {
+    "id": "84",
+    "text": "MedGuide Hospital stocks vaccines such as Hepatitis B, HPV, and COVID-19 vaccines. These are essential for preventing infectious diseases and promoting public health."
+  },
+  {
+    "id": "85",
+    "text": "Our anesthesia department uses medications like Propofol and Sevoflurane for general anesthesia during surgeries. These ensure patients are pain-free and unconscious during procedures."
+  },
+  {
+    "id": "86",
+    "text": "For anticoagulation therapy, we provide medications like Heparin and Rivaroxaban. These are used to prevent blood clots in patients with conditions like deep vein thrombosis (DVT)."
+  },
+  {
+    "id": "87",
+    "text": "MedGuide Hospital offers antihistamines like Cetirizine for allergy relief. These medications help manage symptoms like sneezing, itching, and rashes."
+  },
+  {
+    "id": "88",
+    "text": "Our dermatology department provides topical treatments like Hydrocortisone cream for skin conditions. These are effective for managing eczema, psoriasis, and other skin disorders."
+  },
+  {
+    "id": "89",
+    "text": "For thyroid disorders, we offer medications like Levothyroxine. These help regulate thyroid hormone levels and manage conditions like hypothyroidism."
+  },
+  {
+    "id": "90",
+    "text": "MedGuide Hospital provides antimalarial drugs like Artemether-Lumefantrine. These are essential for treating and preventing malaria, a common disease in the region."
+  },
+  {
+    "id": "91",
+    "text": "Our neurology department uses anticonvulsants like Carbamazepine for epilepsy. These medications help control seizures and improve patients’ quality of life."
+  },
+  {
+    "id": "92",
+    "text": "For osteoporosis, we provide medications like Alendronate. These help strengthen bones and reduce the risk of fractures in elderly patients."
+  },
+  {
+    "id": "93",
+    "text": "MedGuide Hospital offers antiviral medications like Acyclovir for herpes infections. These are effective in managing viral outbreaks and reducing symptoms."
+  },
+  {
+    "id": "94",
+    "text": "Our hospital provides iron supplements and erythropoietin for anemia. These help increase red blood cell production and improve energy levels."
+  },
+  {
+    "id": "95",
+    "text": "For fungal infections, we offer antifungal medications like Fluconazole. These are used to treat conditions like candidiasis and ringworm."
+  },
+  {
+    "id": "96",
+    "text": "MedGuide Hospital stocks emergency medications like Adrenaline for anaphylaxis. These are critical for managing life-threatening allergic reactions."
+  },
+  {
+    "id": "97",
+    "text": "Our hospital provides medications for hypertension, including Lisinopril and Hydrochlorothiazide. These help control high blood pressure and prevent complications."
+  },
+  {
+    "id": "98",
+    "text": "For migraines, we offer medications like Sumatriptan. These help relieve severe headaches and improve patients’ quality of life."
+  },
+  {
+    "id": "99",
+    "text": "MedGuide Hospital provides medications for Parkinson’s disease, including Levodopa. These help manage symptoms like tremors and stiffness."
+  },
+  {
+    "id": "100",
+    "text": "Our hospital offers medications for rheumatoid arthritis, including Methotrexate. These help reduce inflammation and slow disease progression."
+  },
+  {
+    "id": "101",
+    "text": "For tuberculosis, we provide medications like Rifampicin and Isoniazid. These are part of the standard TB treatment regimen."
+  },
+  {
+    "id": "102",
+    "text": "MedGuide Hospital stocks medications for glaucoma, including Timolol eye drops. These help reduce intraocular pressure and prevent vision loss."
+  },
+  {
+    "id": "103",
+    "text": "Our hospital provides medications for gout, including Allopurinol. These help reduce uric acid levels and prevent painful flare-ups."
+  },
+  {
+    "id": "104",
+    "text": "For insomnia, we offer medications like Zolpidem. These help patients achieve restful sleep and improve overall well-being."
+  },
+  {
+    "id": "105",
+    "text": "MedGuide Hospital provides medications for chronic kidney disease, including Phosphate binders. These help manage complications and improve patients’ quality of life."
+  },
+  {
+    "id": "106",
+    "text": "Our hospital offers medications for multiple sclerosis, including Interferon beta. These help slow disease progression and manage symptoms."
+  },
+  {
+    "id": "107",
+    "text": "For hepatitis C, we provide medications like Sofosbuvir. These are part of the antiviral treatment regimen to cure the infection."
+  },
+  {
+    "id": "108",
+    "text": "MedGuide Hospital stocks medications for Alzheimer’s disease, including Donepezil. These help manage cognitive symptoms and improve patients’ quality of life."
+  },
+  {
+    "id": "109",
+    "text": "Our hospital provides medications for ADHD, including Methylphenidate. These help improve focus and reduce hyperactivity in patients."
+  },
+  {
+    "id": "110",
+    "text": "For Crohn’s disease, we offer medications like Infliximab. These help reduce inflammation and manage symptoms effectively."
+  },
+  {
+    "id": "111",
+    "text": "MedGuide Hospital provides medications for lupus, including Hydroxychloroquine. These help manage symptoms and prevent disease flares."
+  },
+  {
+    "id": "112",
+    "text": "Our hospital offers medications for cystic fibrosis, including Ivacaftor. These help improve lung function and overall health."
+  },
+  {
+    "id": "113",
+    "text": "For psoriasis, we provide medications like Methotrexate. These help reduce skin inflammation and improve patients’ quality of life."
+  },
+  {
+    "id": "114",
+    "text": "MedGuide Hospital stocks medications for bipolar disorder, including Lithium. These help stabilize mood and prevent manic episodes."
+  },
+  {
+    "id": "115",
+    "text": "Our hospital provides medications for chronic pain, including Gabapentin. These help manage pain and improve patients’ daily functioning."
+  },
+  {
+    "id": "116",
+    "text": "For asthma, we offer medications like Montelukast. These help reduce inflammation and prevent asthma attacks."
+  },
+  {
+    "id": "117",
+    "text": "MedGuide Hospital provides medications for epilepsy, including Valproic acid. These help control seizures and improve patients’ quality of life."
+  },
+  {
+    "id": "118",
+    "text": "Our hospital offers medications for hypertension, including Losartan. These help control high blood pressure and prevent complications."
+  },
+  {
+    "id": "119",
+    "text": "For diabetes, we provide medications like Glimepiride. These help regulate blood sugar levels and prevent complications."
+  },
+  {
+    "id": "120",
+    "text": "MedGuide Hospital stocks medications for osteoporosis, including Risedronate. These help strengthen bones and reduce the risk of fractures."
   }
 ]
+  
