@@ -24,6 +24,15 @@ The MedGuide Hospital Chatbot is an AI-powered assistant designed to provide acc
 
 ---
 
+## **Architecture: Retrieval-Augmented Generation (RAG)**
+The MedGuide Hospital Chatbot employs a Retrieval-Augmented Generation (RAG) architecture to deliver accurate and contextually relevant responses. This architecture integrates retrieval-based methods with generative models, ensuring that answers are rooted in factual information from a knowledge base. The retrieval process involves converting user queries into embeddings using the `Xenova/all-MiniLM-L6-v2` model and performing a similarity search via `Pinecone`, a vector database, to fetch the most relevant text chunks from the hospital brochure data. These retrieved chunks are then combined with the user's query to form a contextual prompt for the generative model.
+
+The generative phase utilizes the `meta-llama/llama-3.3-70b-instruct:free` model (accessed through `OpenRouter`) to synthesize concise and accurate responses based on the retrieved context and the user's query. This RAG approach offers several benefits, including enhanced accuracy by grounding responses in factual data, improved relevance through context-aware retrieval, scalability by allowing easy updates to the knowledge base without retraining the model, and flexibility in handling a wide range of queries by leveraging the retrieved context.
+
+![RAG Architecture](./docs/rag-architecture.png)
+
+---
+
 ## **Getting Started**
 
 ### **Prerequisites**
@@ -84,7 +93,7 @@ medguide-ai/
 ├── app/
 │   ├── api/                  # API routes
 │   │   └── route.js          # Chatbot API endpoint
-│   |   └──pipeline.js           # Embedding pipeline
+│   |   └──pipeline.js        # Embedding pipeline
 │   ├── page.js               # Main page component
 │   └── scripts/
 │       └── init-pinecone.js  # Script to insert data into Pinecone
@@ -119,27 +128,12 @@ The following environment variables are required:
 ### **Example Queries**
 - **What are the visiting hours?**
   ```
-  Visiting hours at MedGuide Hospital are from 8:00 AM to 8:00 PM daily.
+  I don't know the specific visiting hours at MedGuide Hospital. However, I can tell you that the General OPD operates from Monday to Friday, 8:00 AM - 6:00 PM, and Emergency services are available 24/7.
   ```
 
 - **Which doctors do you have at your hospital?**
   ```
-  MedGuide Hospital has expert doctors specializing in:
-  - Cardiology
-  - Oncology
-  - Orthopedics
-  - Neurology
-  - Dermatology
-  ```
-
-- **What amenities do you offer?**
-  ```
-  MedGuide Hospital offers the following amenities:
-  - Comfortable private and semi-private rooms
-  - Free Wi-Fi
-  - Cafeteria with healthy meals
-  - Secure parking
-  - Prayer room
+  We have doctors specializing in various fields, including: - Cardiologists - Oncologists - Orthopedic surgeons - Neurologists - Dermatologists Note: For specific doctor names, I would recommend checking our website or contacting our administration for the most up-to-date information.
   ```
 
 ---
@@ -174,11 +168,6 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 
 ---
 
-## **License**
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## **Acknowledgments**
 - **Pinecone**: For providing the vector database.
 - **OpenRouter**: For enabling access to the Meta Llama 3 70B Instruct model.
@@ -192,5 +181,3 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 For questions or feedback, please contact:
 - **Boniface Munga**: [Email Me](mailto:mwachilumobm@gmail.com)
 - **GitHub**: [MungaSoftwiz](https://github.com/MungaSoftwiz)
-
----
