@@ -116,7 +116,7 @@ Question: ${query}`;
       console.error('Streaming failed, falling back to non-streaming:', streamError);
 
       const completion = await openai.chat.completions.create({
-        model: 'deepseek-r1:free', // Use the free model
+        model: 'meta-llama/llama-3.3-70b-instruct:free',
         messages: [{ role: 'system', content: prompt }],
         stream: false,
       });
